@@ -51,4 +51,4 @@ A SQL Server database project designed to manage:
 
 ## ER Diagram
 
-See [ERD.png](ERD.png).
+See [ERD.png](https://github.com/Ik6022861/Data-Analytics-Portfolio/blob/main/EHIAS-Hospital-Management-Database/ERD.png).
