@@ -1,330 +1,415 @@
-\# Olist Dashboard
+# Olist E-Commerce Business Intelligence Dashboard
 
+## 📌 Project Overview
 
+This project uses the Olist Brazilian E-Commerce dataset to perform end-to-end business analysis and dashboard development using SQL Server, Python, and Power BI.
 
-\## Project Overview
+The Olist dataset consists of multiple datasets containing information about customers, orders, products, sellers, reviews, geolocation, payments, and order items.
 
+The objective of this project was to build a complete Business Intelligence solution by extracting data from SQL Server, performing data cleaning and transformation using Python, and developing interactive Power BI dashboards to generate actionable business insights related to sales performance, customer behavior, operational efficiency, product performance, and seller performance.
 
+---
 
-This project uses the Olist real-world dataset for data analysis and dashboard development.
+# 🎯 Business Objective
 
+The goal of this project was to help stakeholders understand:
 
+- Overall business performance.
+- Customer purchasing behavior.
+- Product performance trends.
+- Customer retention and churn.
+- Order fulfillment efficiency.
+- Payment method preferences.
+- Product relationships and cross-selling opportunities.
+- Revenue growth and decline across categories.
+- Seller performance and market opportunities.
 
-The dataset contains 9 Excel datasets from the Olist company. The data was first uploaded into a database and then pulled from the database using Python for data cleaning and preparation.
+---
 
+# 🏗 Solution Architecture
 
+```text
+Excel Datasets
+       │
+       ▼
+SQL Server Database
+       │
+       ▼
+Python Data Cleaning & Validation
+       │
+       ▼
+Cleaned & Prepared Data
+       │
+       ▼
+Power BI Data Model
+       │
+       ▼
+DAX Measures & KPIs
+       │
+       ▼
+Interactive Dashboards
+       │
+       ▼
+Business Insights
+```
 
-\## Data Preparation Process
+---
 
+# 🐍 Data Preparation & Cleaning
 
+The original Olist dataset was loaded into SQL Server and processed using Python.
 
-1\. Collected the 9 Excel datasets from the Olist dataset.
+## Customer Dataset
 
-2\. Uploaded the Excel data into a database.
+Performed:
 
-3\. Connected Python to the database.
+- Customer city standardization.
+- Removal of special characters.
+- Data formatting improvements.
+- Removal of unnecessary columns.
 
-4\. Pulled the data from the database using Python.
+## Geolocation Dataset
 
-5\. Cleaned and prepared the data using Python.
+Performed:
 
-6\. Used the cleaned data to perform business analysis.
+- Duplicate removal.
+- Removal of latitude and longitude fields.
+- City name standardization.
+- Accent removal using Unidecode.
+- Invalid character handling.
+- Manual city corrections.
+- Data quality validation.
 
-7\. Created Power BI visuals and dashboards based on the analysis requirements.
+## Product Dataset
 
+Performed:
 
+- Category translation from Portuguese to English.
+- Missing category correction.
+- Product category standardization.
+- Removal of unnecessary product attributes.
 
-\## Business Questions and Analysis
+## Seller Dataset
 
+Performed:
 
+- Seller city standardization.
+- Duplicate removal.
 
-\### 1. General Business Information
+## Orders Dataset
 
+Performed:
 
+- Invalid date validation.
+- Fulfillment sequence validation.
+- Removal of logically incorrect order records.
+- Payment data integration.
+- Order items integration.
+- Quantity calculation.
+- Aggregated order-level metrics creation.
 
-Created visuals to show:
+## Review Dataset
 
+Performed:
 
+- Selection of relevant review attributes.
+- Creation of reporting-ready review data.
 
-\- Total Customers
+---
 
-\- Total Orders
+# 📊 Dashboard Overview
 
-\- Total Sales
+The dashboard consists of four business intelligence pages.
 
-\- Average Order Value = Total Sales / Total Orders
+---
 
-\- Count of customers who have not purchased in the last 12 months
+# Page 1 – Executive Business Overview
 
+### KPI Metrics
 
+- Total Purchasing Customers
+- Total Orders
+- Total Sales
+- Average Order Value (AOV)
+- Inactive Customers (Last 12 Months)
 
-\### 2. Product Category Contribution to Sales
+### Analysis Included
 
+#### Product Category Contribution to Sales
 
+Analyzed each product category’s percentage contribution toward total sales.
 
-Analyzed the contribution of each product category to overall sales by calculating its percentage share of total sales.
+Categories were visually classified based on contribution levels:
 
+- Greater than 5%
+- Between 3% and 5%
+- Less than 3%
 
+#### Product Photos vs Quantity Sold
 
-Category contribution is color-coded:
+Examined whether the number of product photos influences customer purchasing behavior.
 
+#### Review Score by Delivery Status
 
+Compared average review scores between:
 
-\- Green: contribution greater than 5%
+- On-Time Deliveries
+- Late Deliveries
 
-\- Cream: contribution between 3% and 5%
+#### Customer Churn Analysis
 
-\- Yellow: contribution less than 3%
+Identified customers who stopped purchasing in following years.
 
+#### Promotion Impact Analysis
 
+Simulated the impact of a Buy-One-Get-One-Free promotion on profitability using top-selling products.
 
-Percentage values are displayed using a blue gradient to make comparisons more visually intuitive.
+---
 
+# Page 2 – Customer Orders & Operations Analysis
 
+### Market Basket Analysis
 
-\### 3. Customer Churn Analysis
+Performed association analysis using:
 
+- Support
+- Confidence
+- Lift
 
+The objective was to identify products frequently purchased together.
 
-Identified customers who churned in each year. A customer is considered churned when they made purchases in a previous year but did not place any orders in the following year.
+Business Applications:
 
+- Cross-selling
+- Recommendation systems
+- Product bundling
+- Promotional campaigns
 
+### Order Fulfillment Analysis
 
-The analysis highlights customer churn year by year to help understand customer retention trends.
+Measured average fulfillment time for:
 
+- Order Approval
+- Shipment Processing
+- Delivery Completion
 
+This analysis helps identify operational bottlenecks.
 
-\### 4. Product Photos vs Quantity Sold
+### Payment Method Analysis
 
+Analyzed sales distribution across:
 
+- Credit Card
+- Boleto
+- Voucher
+- Debit Card
 
-Analyzed whether there is a relationship between the quantity of products sold and the number of product photos available on the website.
+The objective was to understand customer payment preferences.
 
+---
 
+# Page 3 – Product Performance & Sales Trends
 
-Each order-item row is counted as one quantity. The objective is to determine whether products with more photos tend to sell in higher quantities.
+### New Product Performance Analysis
 
+Evaluated product categories based on newly launched products.
 
+A product was considered new if introduced within six months of the latest available transaction date.
 
-\### 5. Market Basket Analysis
+Key Metrics:
 
+- New Product Sales
+- New Product Orders
+- Category-Level Performance
 
+### Product Seasonality Analysis
 
-Performed market basket analysis to identify products that are frequently purchased together in the same order.
+Analyzed how product demand varies across months and years.
 
+Applications:
 
+- Inventory Management
+- Demand Forecasting
+- Marketing Planning
+- Seasonal Promotions
 
-The analysis can support:
+---
 
+# Page 4 – Business Performance & Revenue Insights
 
+### Sales Price vs Order Quantity Analysis
 
-\- Cross-selling
+Compared changes in:
 
-\- Product bundling
+- Sales Price
+- Customer Order Quantity
 
-\- Targeted marketing
+to understand category-level performance and pricing impact.
 
-\- Product recommendations
+### Category Revenue Trend Analysis
 
+Compared revenue generated during:
 
+- First 90 Days
+- Most Recent 90 Days
 
-\### 6. New Product Performance
+This analysis identifies categories that are:
 
+- Growing
+- Declining
+- Stable
 
+### High-Rated Seller Performance Analysis
 
-Evaluated category performance based on recently launched products.
+Identified sellers meeting two conditions:
 
+- Average Review Score greater than 4.5
+- Less than 10% of sales from customers located in their home state
 
+This analysis helps identify untapped local market opportunities.
 
-A product is considered recently launched when it was introduced within the last 6 months from the latest date available in the dataset.
+---
 
+# 💡 Key Business Insights
 
+### Customer Insights
 
-The analysis includes:
+- A significant number of customers became inactive after 12 months.
+- Customer churn patterns varied by year.
+- Customer satisfaction was strongly influenced by delivery performance.
 
+### Product Insights
 
+- A small number of categories generated a large percentage of total sales.
+- Product categories displayed clear seasonality patterns.
+- Certain newly launched products showed strong market adoption.
 
-\- Total sales from new products
+### Operational Insights
 
-\- Total orders from new products
+- Delivery time was the longest stage of fulfillment.
+- Faster deliveries were associated with higher review scores.
+- Order processing delays impacted customer experience.
 
-\- Category-level performance
+### Payment Insights
 
+- Credit Cards accounted for the majority of transaction value.
+- Alternative payment methods represented a significantly smaller share of sales.
 
+### Seller Insights
 
-\### 7. Product Seasonality
+- Several highly-rated sellers had low local market penetration.
+- Revenue growth varied substantially across product categories.
 
+### Market Basket Insights
 
+- Product combinations with strong lift values provided cross-selling opportunities.
+- Frequently purchased-together categories can be used for recommendation engines and bundled promotions.
 
-Identified products that exhibit seasonality in their sales.
+---
 
+# 🛠 Technologies Used
 
+## Data Storage
 
-The analysis examines recurring monthly sales patterns and fluctuations to support:
+- SQL Server
 
+## Data Processing
 
+- Python
+- Pandas
+- PyODBC
+- Unidecode
 
-\- Inventory planning
+## Business Intelligence
 
-\- Promotions
+- Power BI
+- Power Query
+- DAX
 
-\- Marketing strategies
+## Data Source
 
-\- Demand forecasting
+- Olist Brazilian E-Commerce Dataset
+- Excel Files
 
+## Version Control
 
+- Git
+- GitHub
 
-\### 8. Product Price Changes vs Sales
+---
 
+# 📂 Project Structure
 
+```text
+OlistDashboard
+│
+├── Dashboard
+│   └── OlistDataDashboard.pbix
+│
+├── DataCleaningUsingPython
+│   ├── Python Scripts
+│   └── Cleaned Data Files
+│
+├── Dataset
+│
+├── Screenshots
+│
+└── README.md
+```
 
-Calculated the average change in product prices over the last year for each category and analyzed the relationship between price changes and sales performance.
+---
 
+# 🚀 Business Impact
 
+### Operational Benefits
 
-The objective is to understand whether price increases or decreases were associated with changes in customer purchasing behavior and category sales.
+- Improved visibility into order fulfillment processes.
+- Identified inefficiencies affecting customer satisfaction.
+- Enabled monitoring of customer churn.
 
+### Revenue Benefits
 
+- Highlighted high-performing product categories.
+- Identified revenue growth and decline trends.
+- Supported pricing and promotion decisions.
 
-\### 9. Buy One Get One Free Simulation
+### Customer Benefits
 
+- Improved understanding of customer behavior.
+- Supported customer retention initiatives.
+- Identified purchasing patterns for targeted marketing.
 
+### Strategic Benefits
 
-Simulated the potential impact of a Buy One Get One Free promotion on profit margin.
+- Supported data-driven decision making.
+- Revealed market basket opportunities.
+- Identified underperforming but highly-rated sellers.
+- Improved understanding of long-term category performance.
 
+---
 
+# 📸 Dashboard Pages
 
-The simulation was performed on the top 10 selling products based on quantity.
+### Page 1 – Executive Business Overview
 
+Executive KPIs, Customer Churn, Delivery Performance, Product Contribution, Promotion Impact.
 
+### Page 2 – Customer Orders & Operations Analysis
 
-Assumptions:
+Market Basket Analysis, Order Fulfillment Performance, Payment Behavior.
 
+### Page 3 – Product Performance & Sales Trends
 
+New Product Analysis, Product Seasonality, Sales Trends.
 
-\- The promotion would double the quantity sold.
+### Page 4 – Business Performance & Revenue Insights
 
-\- Every second item would be sold at zero price.
+Revenue Analysis, Price vs Quantity Analysis, Seller Performance.
 
-\- The simulation estimates the potential financial impact of the promotion.
+---
 
+# 👨‍💻 Author
 
+**Ibrar Aman**
 
-\### 10. Payment Method Analysis
-
-
-
-Analyzed customer payments grouped by payment type to understand the distribution of sales across different payment methods.
-
-
-
-This analysis helps identify the most preferred payment options and can support financial and promotional strategies.
-
-
-
-\### 11. On-Time vs Late Delivery
-
-
-
-Compared the average review score for orders delivered on time versus orders delivered late.
-
-
-
-The objective is to understand whether delivery performance is associated with customer satisfaction.
-
-
-
-\### 12. Order Fulfillment Time
-
-
-
-Calculated the average time, in hours, for each stage of the order fulfillment process.
-
-
-
-This analysis helps identify stages that may require additional operational attention.
-
-
-
-\### 13. First 90 Days vs Most Recent 90 Days
-
-
-
-Compared product category revenue from the first 90 days on the platform with revenue from the most recent 90 days.
-
-
-
-The objective is to identify which product categories are maturing successfully and how their revenue performance has changed over time.
-
-
-
-\### 14. Highly Rated but Underperforming Local Sellers
-
-
-
-Identified sellers who have an average review score greater than 4.5 but appear to be underperforming in their local market.
-
-
-
-An underperforming seller is defined as a seller where less than 10% of total sales come from customers within the seller's own state.
-
-
-
-This analysis can help identify potential missed local marketing opportunities.
-
-
-
-\## Tools and Technologies
-
-
-
-\- Excel
-
-\- Database
-
-\- Python
-
-\- Pandas
-
-\- SQL
-
-\- Power BI
-
-\- DAX
-
-
-
-\## Project Workflow
-
-
-
-Excel Data  
-
-↓  
-
-Database  
-
-↓  
-
-Python  
-
-↓  
-
-Data Cleaning and Preparation  
-
-↓  
-
-Cleaned Data  
-
-↓  
-
-Power BI  
-
-↓  
-
-DAX Analysis  
-
-↓  
-
-Dashboard and Business Insights
-
+**Skills:** SQL Server, Python, Pandas, Power BI, Power Query, DAX, Excel, Data Analytics, Business Intelligence
